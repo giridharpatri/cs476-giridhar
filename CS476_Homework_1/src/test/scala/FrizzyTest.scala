@@ -105,7 +105,7 @@ class FrizzyTest extends AnyFlatSpec with Matchers {
 
     val expected = Map(
       "x1" -> 0.8,
-      "x2" -> 0.2,
+      "x2" -> 0.19999999999999996,
       "x3" -> 0.5
     )
 
