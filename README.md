@@ -1,3 +1,5 @@
+Giridhar Patri (CS 476)
+
 To run the program, enter the directory with the sbt.build file (in this case the CS476_Homework_1 directory). 
 
 sbt compile to compile
