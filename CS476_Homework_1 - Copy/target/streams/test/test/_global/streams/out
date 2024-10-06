@@ -1,0 +1,14 @@
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(FrizzyTest, org.scalatest.tools.Framework$$anon$1@318e745f, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mFrizzyTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should assign and retrieve variables correctly[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should perform Union, Intersect, and XOR operation correctly[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should variable bindings should be consistent with Begin and End scopes[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should tests creation and invoking of named scopes, and sequence of operations[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should should obscure variables defined in invoked scopes from outside[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 1 second, 119 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 5[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	FrizzyTest[0m

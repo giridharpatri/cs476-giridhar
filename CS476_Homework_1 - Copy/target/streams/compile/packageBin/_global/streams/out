@@ -1,0 +1,75 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\cs476_homework_1_3-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$AlphaCut$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$AlphaCut$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$AlphaCut.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$AlphaCut.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Assign$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Assign$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Assign.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Assign.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$BeginScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$BeginScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$BeginScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$BeginScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Complement$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Complement$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Complement.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Complement.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$CreateScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$CreateScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$CreateScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$CreateScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$EndScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$EndScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$EndScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$EndScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$FuzzySetInstance$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$FuzzySetInstance$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$FuzzySetInstance.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$FuzzySetInstance.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Intersection$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Intersection$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Intersection.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Intersection.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Perform$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Perform$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Perform.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Perform.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Scope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Scope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Scope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Scope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$SummonScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$SummonScope$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$SummonScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$SummonScope.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Union$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Union$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Union.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Union.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Variable$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Variable$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Variable.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Variable.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$XOR$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$XOR$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$XOR.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$XOR.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\target\scala-3.5.1\classes\main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
