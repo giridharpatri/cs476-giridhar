@@ -1,5 +1,5 @@
-[0m[[0m[33mwarn[0m] [0m[0m[33m[33m-- [E029] Pattern Match Exhaustivity Warning: C:\Users\GPatr\Desktop\CS 476\CS476_Homework_1\src\main\scala\Frizzy.scala:43:45 [0m[0m[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m43 |[0m  [33mdef[0m [36meval[0m([36mexp[0m: [35mExpOperation[0m): [35mEvalContext[0m = exp [33mmatch[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m[33m-- [E029] Pattern Match Exhaustivity Warning: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\main\scala\Frizzy.scala:52:45 [0m[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m52 |[0m  [33mdef[0m [36meval[0m([36mexp[0m: [35mExpOperation[0m): [35mEvalContext[0m = exp [33mmatch[0m[0m
 [0m[[0m[33mwarn[0m] [0m[0m[33m[33m   |[0m                                             ^^^[0m[0m
 [0m[[0m[33mwarn[0m] [0m[0m[33m   |[0m                    [33mmatch[0m may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0m[33m   |[0m[0m

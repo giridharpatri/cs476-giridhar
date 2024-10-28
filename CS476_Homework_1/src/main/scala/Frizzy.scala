@@ -1,6 +1,6 @@
 import scala.collection.mutable
 
-// frizzy is the name of the language 
+  // TESTING TO SEE IF SOURCE CONTROL IS WORKING!!
 object Frizzy:
   // define types for a fuzzy value
   type FuzzyValue = Double
