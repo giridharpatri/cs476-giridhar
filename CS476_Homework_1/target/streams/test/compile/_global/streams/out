@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E006] Not Found Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:232:77 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m232 |[0m        MethodDef([31m"add"[0m, List(Parameter([31m"a"[0m, [31m"int"[0m), Parameter([31m"b"[0m, [31m"int"[0m)), Add(Variable([31m"a"[0m), Variable([31m"b"[0m)))[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m                                                                             ^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                                        Not found: Add[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
