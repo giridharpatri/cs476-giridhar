@@ -22,11 +22,11 @@
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
 [0m[[0m[0minfo[0m] [0m[0mcompiling 2 Scala sources to C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mReturning already retrieved and compiled bridge: C:\Users\GPatr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-sbt-bridge\3.5.1\scala3-sbt-bridge-3.5.1.jar.[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 2a815605 for Scala Compiler version 3.5.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 7d99587b for Scala Compiler version 3.5.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	C:\Users\GPatr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-library_3\3.5.1\scala3-library_3-3.5.1.jar;C:\Users\GPatr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.14\scala-library-2.13.14.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 8.544866599 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 8.2255575 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mdone compiling[0m

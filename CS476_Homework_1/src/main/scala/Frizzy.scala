@@ -1,5 +1,5 @@
 import scala.collection.mutable
-
+// final commit for homework 3
 object Frizzy:
   // Define types for a fuzzy value
   type FuzzyValue = Double

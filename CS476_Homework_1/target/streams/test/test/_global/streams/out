@@ -1,11 +1,11 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(FrizzyTest, org.scalatest.tools.Framework$$anon$1@ddeea97, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(FrizzyTest, org.scalatest.tools.Framework$$anon$1@5968901b, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mFrizzyTest:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should partially evaluate conditional expressions with unknown variables[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should partially evaluateeee conditional expressions with unknown variables[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should partially evaluate method invocations with unknown arguments[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should correctly handle method overriding with partial evaluation in inheritance hierarchies[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should apply reduction rules and handle associativity in partial evaluations[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should partially evaluate method calls in inheritance hierarchies with dynamic dispatch[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 652 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 480 milliseconds.[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 5[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0[0m[0m

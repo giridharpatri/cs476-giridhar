@@ -6,7 +6,7 @@ import scala.collection.mutable
 
 class FrizzyTest extends AnyFlatSpec with Matchers {
 
-  it should "partially evaluate conditional expressions with unknown variables" in {
+  it should "partially evaluateeee conditional expressions with unknown variables" in {
     given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
     envStack.clear()
     envStack.push(("", mutable.Map[String, Any]()))
