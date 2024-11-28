@@ -10,6 +10,10 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ClassInfo.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Add$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Add$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Add.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Add.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$AlphaCut$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$AlphaCut$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$AlphaCut.class[0m
@@ -54,6 +58,14 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$FuzzySetInstance$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$FuzzySetInstance.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$FuzzySetInstance.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$GREATEREQUAL$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$GREATEREQUAL$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$GREATEREQUAL.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$GREATEREQUAL.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$IFTRUE$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$IFTRUE$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$IFTRUE.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$IFTRUE.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Intersection$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Intersection$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Intersection.class[0m
@@ -66,6 +78,10 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$MethodDef$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$MethodDef.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$MethodDef.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Multiply$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Multiply$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Multiply.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Multiply.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$NestedClassDef$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$NestedClassDef$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$NestedClassDef.class[0m
@@ -74,10 +90,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Perform$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Perform.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Perform.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Scope$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Scope$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$Scope.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$Scope.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$SummonScope$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\target\scala-3.5.1\classes\Frizzy$ExpOperation$SummonScope$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Frizzy$ExpOperation$SummonScope.class[0m

@@ -1,29 +1,29 @@
 import scala.collection.mutable
-import HelperFunctions.*
 
-
-  // TESTING TO SEE IF SOURCE CONTROL IS WORKING!!
 object Frizzy:
-  // define types for a fuzzy value
+  // Define types for a fuzzy value
   type FuzzyValue = Double
-  type Element = String 
-  // define a fuzzy set
+  type Element = String
+  // Define a fuzzy set
   type FuzzySet = Map[Element, FuzzyValue]
 
   type Environment = mutable.Map[String, Any]
   type EnvironmentStack = mutable.Stack[(String, Environment)]
   type EvalContext = EnvironmentStack ?=> Any
 
-  // Initialize the environment stack with a global environment, keeps track of what scope is in
-  // session currently. 
+  // Initialize the environment stack with a global environment
   given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
 
-  // Scope registry for storing scope definitions
+  // Registries for scopes, classes, and instances
   val scopeRegistry: mutable.Map[String, ExpOperation] = mutable.Map()
   val classRegistry: mutable.Map[String, ClassInfo] = mutable.Map()
   val instanceRegistry: mutable.Map[String, InstanceInfo] = mutable.Map()
+
   // Class information
-  case class ClassInfo(name: String, parent: Option[String], variables: mutable.Map[String, String], // variable name and type
+  case class ClassInfo(
+                        name: String,
+                        parent: Option[String],
+                        variables: mutable.Map[String, String], // variable name and type
                         methods: mutable.Map[String, MethodInfo],
                         nestedClasses: mutable.Map[String, ClassInfo]
                       )
@@ -32,19 +32,15 @@ object Frizzy:
   case class MethodInfo(name: String, params: List[Parameter], body: ExpOperation)
 
   // Instance information
-  case class InstanceInfo(className: String, variables: mutable.Map[String, Any] )
+  case class InstanceInfo(className: String, variables: mutable.Map[String, Any])
   case class Parameter(name: String, paramType: String)
 
-
-
   enum ExpOperation:
-    // define variables and assignment operation. FuzzySetInstance is just a FuzzySet 
-    // initialized with a Map
+    // Variable and assignment operations
     case FuzzySetInstance(set: FuzzySet)
     case Variable(name: String)
     case Assign(name: String, expr: ExpOperation)
     case Value(value: Any)
-
 
     // Fuzzy logic operations
     case Union(p1: ExpOperation, p2: ExpOperation)
@@ -56,33 +52,69 @@ object Frizzy:
     // Scope operations
     case BeginScope(name: String)
     case EndScope(name: String)
-    case Scope(body: ExpOperation)
-    
-    // Use this to have multiple operatons executed one after another, used when 
-    // creating a scope
     case Perform(ops: List[ExpOperation])
-    
-    // create and summon a scope (for modularity)
     case CreateScope(name: String, body: ExpOperation)
     case SummonScope(name: String)
-    // oop related stuff now
+
+    // Object-oriented programming constructs
     case ClassDef(name: String, body: ExpOperation, parent: Option[String] = None)
     case ClassVar(name: String, varType: String)
     case MethodDef(methodName: String, params: List[Parameter], body: ExpOperation)
-    //case Parameter(name: String, paramType: String)
     case CreateInstance(className: String, instanceName: String)
     case InvokeMethod(instanceName: String, methodName: String, args: List[ExpOperation])
     case Extends(subclass: String, superclass: String)
     case NestedClassDef(outerClassName: String, nestedClass: ExpOperation)
     case SuperInvoke(methodName: String, args: List[ExpOperation])
 
+    // Arithmetic and comparison operations
+    case Add(lhs: ExpOperation, rhs: ExpOperation)
+    case Multiply(lhs: ExpOperation, rhs: ExpOperation)
+    case GREATEREQUAL(lhs: ExpOperation, rhs: ExpOperation)
+
+    // Conditional constructs
+    case IFTRUE(condition: ExpOperation, thenBranch: ExpOperation, elseBranch: ExpOperation)
 
   import ExpOperation.*
-  // evaluation function
 
+  // Helper function to convert any value to ExpOperation
+  def asExpOperation(v: Any): ExpOperation = v match
+    case e: ExpOperation => e
+    case i: Int => Value(i)
+    case b: Boolean => Value(b)
+    case other => Value(other)
+
+  // Evaluation function
   def eval(exp: ExpOperation): EvalContext = exp match
     case FuzzySetInstance(set) => set
     case Value(v) => v
+
+    case Add(lhs, rhs) =>
+      val leftEval = eval(lhs)
+      val rightEval = eval(rhs)
+      (leftEval, rightEval) match
+        case (l: Int, r: Int) => l + r
+        case _ => Add(asExpOperation(leftEval), asExpOperation(rightEval))
+
+    case Multiply(lhs, rhs) =>
+      val leftEval = eval(lhs)
+      val rightEval = eval(rhs)
+      (leftEval, rightEval) match
+        case (l: Int, r: Int) => l * r
+        case _ => Multiply(asExpOperation(leftEval), asExpOperation(rightEval))
+
+    case GREATEREQUAL(lhs, rhs) =>
+      val leftEval = eval(lhs)
+      val rightEval = eval(rhs)
+      (leftEval, rightEval) match
+        case (l: Int, r: Int) => l >= r
+        case _ => GREATEREQUAL(asExpOperation(leftEval), asExpOperation(rightEval))
+
+    case IFTRUE(condition, thenBranch, elseBranch) =>
+      val condEval = eval(condition)
+      condEval match
+        case true => eval(thenBranch)
+        case false => eval(elseBranch)
+        case _ => IFTRUE(asExpOperation(condEval), thenBranch, elseBranch)
 
     case ClassDef(name, body, parent) =>
       val classInfo = ClassInfo(
@@ -96,24 +128,7 @@ object Frizzy:
       evalClassBody(body, classInfo)
       // Register the class in the global classRegistry
       classRegistry.update(name, classInfo)
-      // Return an empty value or any appropriate result
       ()
-
-
-
-    //    case ClassVar(name, varType) =>
-//      // Add the variable to the current class environment
-//      val currentEnv = summon[EnvironmentStack].top._2
-//      currentEnv.update(name, null) // Initialize with null or a default value
-//      // Record the variable in the classInfo
-//      // (Assuming we have access to the current ClassInfo object)
-//      // currentClassInfo.variables.update(name, varType)
-//      Map.empty[Element, FuzzyValue]
-//
-//    case MethodDef(methodName, params, body) =>
-//      // Record the method in the current class's method map
-//      // currentClassInfo.methods.update(methodName, MethodInfo(methodName, params, body))
-//      Map.empty[Element, FuzzyValue]
 
     case CreateInstance(className, instanceName) =>
       val classInfo = classRegistry.getOrElse(className, throw new Exception(s"Class '$className' not found"))
@@ -123,8 +138,7 @@ object Frizzy:
       initializeInstanceVariables(classInfo, instanceEnv)
       // Add the instance to the registry
       instanceRegistry.update(instanceName, InstanceInfo(className, instanceEnv))
-      Map.empty[Element, FuzzyValue]
-
+      ()
 
     case InvokeMethod(instanceName, methodName, args) =>
       val instanceInfo = instanceRegistry.getOrElse(instanceName, throw new Exception(s"Instance '$instanceName' not found"))
@@ -148,41 +162,40 @@ object Frizzy:
       envStack.pop() // method environment
       result
 
-    case Extends(subclass, superclass) =>
-      val subclassInfo = classRegistry.getOrElse(subclass, throw new Exception(s"Class '$subclass' not found"))
-      // Create a new ClassInfo with the updated parent
-      val updatedSubclassInfo = subclassInfo.copy(parent = Some(superclass))
-      // Update the classRegistry with the new ClassInfo
-      classRegistry.update(subclass, updatedSubclassInfo)
-      Map.empty[Element, FuzzyValue]
-
-
-    case NestedClassDef(outerClassName, nestedClassExp) =>
-      val outerClassInfo = classRegistry.getOrElse(outerClassName, throw new Exception(s"Class '$outerClassName' not found"))
-      eval(nestedClassExp)
-      // After evaluation, the nested class should be registered in classRegistry
-      // We can retrieve it and add it to the outer class's nestedClasses
-      nestedClassExp match
-        case ClassDef(nestedClassName, _, _) =>
-          val nestedClassInfo = classRegistry(nestedClassName)
-          outerClassInfo.nestedClasses.update(nestedClassName, nestedClassInfo)
-          // Remove from global registry if necessary
-          classRegistry.remove(nestedClassName)
-        case _ => throw new Exception("Invalid nested class definition")
-      Map.empty[Element, FuzzyValue]
-
     case Variable(name) =>
       val envStack = summon[EnvironmentStack]
-      // Search all environments from top to bottom
-      envStack.find(_._2.contains(name)) match
-        case Some((_, env)) => env(name)
-        case None => throw new Exception(s"Variable '$name' not found")
 
-
+      if name.contains(".") then
+        // Handle instance variable access like instanceName.variableName
+        val parts = name.split("\\.")
+        if parts.length != 2 then
+          throw new Exception(s"Invalid variable name '$name'")
+        val instanceName = parts(0)
+        val varName = parts(1)
+        val instanceInfo = instanceRegistry.getOrElse(instanceName, throw new Exception(s"Instance '$instanceName' not found"))
+        instanceInfo.variables.get(varName) match
+          case Some(value) => value match
+            case exp: ExpOperation => eval(exp)
+            case other => other
+          case None => throw new Exception(s"Variable '$varName' not found in instance '$instanceName'")
+      else
+        // Regular variable lookup
+        envStack.find(_._2.contains(name)) match
+          case Some((_, env)) => env(name) match
+            case value: ExpOperation => eval(value)
+            case other => other
+          case None =>
+            // If not found, check instance variables
+            instanceRegistry.values.find(_.variables.contains(name)) match
+              case Some(instanceInfo) => instanceInfo.variables(name) match
+                case value: ExpOperation => eval(value)
+                case other => other
+              case None => Variable(name)
 
     case Assign(name, expr) =>
       val value = eval(expr)
-      val currentEnv = summon[EnvironmentStack].top._2
+      val envStack = summon[EnvironmentStack]
+
       if name.contains(".") then
         // Handle instance variable assignment
         val parts = name.split("\\.")
@@ -193,272 +206,325 @@ object Frizzy:
         val instanceInfo = instanceRegistry.getOrElse(instanceName, throw new Exception(s"Instance '$instanceName' not found"))
         instanceInfo.variables.update(varName, value)
       else
-        // Regular variable assignment
-        currentEnv.update(name, value)
+        // Regular variable assignment in the current environment
+        envStack.top._2.update(name, value)
       value
 
-
-
+    // Fuzzy logic operations with partial evaluation
     case Union(p1, p2) =>
-      val set1 = evalFuzzySet(p1)
-      val set2 = evalFuzzySet(p2)
-      val unionSet = (set1.keySet ++ set2.keySet).map { element =>
-        val mu1 = set1.getOrElse(element, 0.0)
-        val mu2 = set2.getOrElse(element, 0.0)
-        element -> Math.max(mu1, mu2)
-      }.toMap
-      unionSet
-
+      try
+        val set1 = evalFuzzySet(p1)
+        val set2 = evalFuzzySet(p2)
+        val unionSet = (set1.keySet ++ set2.keySet).map { element =>
+          val mu1 = set1.getOrElse(element, 0.0)
+          val mu2 = set2.getOrElse(element, 0.0)
+          element -> Math.max(mu1, mu2)
+        }.toMap
+        unionSet
+      catch
+        case _: Exception => Union(p1, p2)
 
     case Intersection(p1, p2) =>
-      val set1 = evalFuzzySet(p1)
-      val set2 = evalFuzzySet(p2)
-      val intersectionSet = (set1.keySet ++ set2.keySet).map { element =>
-        val mu1 = set1.getOrElse(element, 0.0)
-        val mu2 = set2.getOrElse(element, 0.0)
-        element -> Math.min(mu1, mu2)
-      }.toMap
-      intersectionSet
+      try
+        val set1 = evalFuzzySet(p1)
+        val set2 = evalFuzzySet(p2)
+        val intersectionSet = (set1.keySet ++ set2.keySet).map { element =>
+          val mu1 = set1.getOrElse(element, 0.0)
+          val mu2 = set2.getOrElse(element, 0.0)
+          element -> Math.min(mu1, mu2)
+        }.toMap
+        intersectionSet
+      catch
+        case _: Exception => Intersection(p1, p2)
 
     case Complement(p) =>
-      val set = evalFuzzySet(p)
-      val complementSet = set.map { case (element, mu) =>
-        element -> (1.0 - mu)
-      }
-      complementSet
+      try
+        val set = evalFuzzySet(p)
+        val complementSet = set.map { case (element, mu) =>
+          element -> (1.0 - mu)
+        }
+        complementSet
+      catch
+        case _: Exception => Complement(p)
 
     case AlphaCut(alpha, setExpr) =>
-      val set = evalFuzzySet(setExpr)
-      val alphaCutSet = set.collect {
-        case (element, mu) if mu >= alpha => element -> 1.0
-      }
-      alphaCutSet
+      try
+        val set = evalFuzzySet(setExpr)
+        val alphaCutSet = set.collect {
+          case (element, mu) if mu >= alpha => element -> 1.0
+        }
+        alphaCutSet
+      catch
+        case _: Exception => AlphaCut(alpha, setExpr)
 
     case XOR(p1, p2) =>
-      val set1 = evalFuzzySet(p1)
-      val set2 = evalFuzzySet(p2)
-      val xorSet = (set1.keySet ++ set2.keySet).map { element =>
-        val mu1 = set1.getOrElse(element, 0.0)
-        val mu2 = set2.getOrElse(element, 0.0)
-        element -> Math.abs(mu1 - mu2)
-      }.toMap
-      xorSet
+      try
+        val set1 = evalFuzzySet(p1)
+        val set2 = evalFuzzySet(p2)
+        val xorSet = (set1.keySet ++ set2.keySet).map { element =>
+          val mu1 = set1.getOrElse(element, 0.0)
+          val mu2 = set2.getOrElse(element, 0.0)
+          element -> Math.abs(mu1 - mu2)
+        }.toMap
+        xorSet
+      catch
+        case _: Exception => XOR(p1, p2)
 
-    // use to create an "anonymous" scope that ends, cannot be reused
+    // Scope operations
     case BeginScope(name) =>
       val envStack = summon[EnvironmentStack]
       envStack.push((name, mutable.Map[String, Any]()))
-      Map.empty[Element, FuzzyValue]
-   // end the scope that was started with the latest BeginScope call
+      ()
+
     case EndScope(name) =>
       val envStack = summon[EnvironmentStack]
       if envStack.nonEmpty && envStack.top._1 == name then
         envStack.pop()
       else
         throw new Exception(s"'$name' is not a scope...")
-      Map.empty[Element, FuzzyValue]
+      ()
 
-//    case Scope(body) =>
-//      val envStack = summon[EnvironmentStack]
-//      envStack.push(("", mutable.Map[String, FuzzySet]()))
-//      val result = eval(body)
-//      envStack.pop()
-//      result
-
-    // this executes a sequence of operations. Use this when creating a new scope
     case Perform(ops) =>
-      var result: Any =()
-      for (op <- ops){ result = eval(op)}
+      var result: Any = ()
+      for op <- ops do result = eval(op)
       result
 
-    // this is used when you want to create a new Scope.
-    // it takes a Perform construct, which in turn takes a list of ExpOperation objects
     case CreateScope(name, body) =>
       scopeRegistry.update(name, body)
-      Map.empty[Element, FuzzyValue]
+      ()
 
-    // this calls the sequence of operations for called scope
     case SummonScope(name) =>
       scopeRegistry.get(name) match
         case Some(body) =>
           val envStack = summon[EnvironmentStack]
           envStack.push((name, mutable.Map[String, Any]()))
           val result = eval(body)
-          envStack.pop()
+          // Merge scope variables into parent environment
+          val scopeEnv = envStack.pop()._2
+          val parentEnv = envStack.top._2
+          parentEnv ++= scopeEnv
           result
         case None =>
-          throw new Exception(s"this scope is not defined...")
+          throw new Exception(s"Scope '$name' is not defined.")
 
+  // Helper functions
+  def evalFuzzySet(exp: ExpOperation): FuzzySet = exp match
+    case FuzzySetInstance(set) => set
+    case Variable(name) =>
+      val envStack = summon[EnvironmentStack]
+      if name.contains(".") then
+        // Handle instance variable access
+        eval(Variable(name)) match
+          case fs: FuzzySet => fs
+          case _ => throw new Exception(s"Variable '$name' is not a FuzzySet")
+      else
+        envStack.find(_._2.contains(name)) match
+          case Some((_, env)) => env(name) match
+            case fs: FuzzySet => fs
+            case exp: ExpOperation => eval(exp) match
+              case fs: FuzzySet => fs
+              case _ => throw new Exception(s"Variable '$name' is not a FuzzySet")
+            case _ => throw new Exception(s"Variable '$name' is not a FuzzySet")
+          case None => throw new Exception(s"Variable '$name' not found")
+    case _ => throw new Exception(s"Cannot evaluate expression to FuzzySet: $exp")
 
+  def evalClassBody(body: ExpOperation, classInfo: ClassInfo): Unit = body match
+    case Perform(ops) =>
+      ops.foreach(op => evalClassBody(op, classInfo))
+    case ClassVar(name, varType) =>
+      classInfo.variables.update(name, varType)
+    case MethodDef(methodName, params, methodBody) =>
+      classInfo.methods.update(methodName, MethodInfo(methodName, params, methodBody))
+    case ClassDef(nestedClassName, nestedBody, parent) =>
+      val nestedClassInfo = ClassInfo(
+        name = nestedClassName,
+        parent = parent,
+        variables = mutable.Map(),
+        methods = mutable.Map(),
+        nestedClasses = mutable.Map()
+      )
+      evalClassBody(nestedBody, nestedClassInfo)
+      classInfo.nestedClasses.update(nestedClassName, nestedClassInfo)
+    case _ => // Handle other cases if needed
 
+  def initializeInstanceVariables(classInfo: ClassInfo, instanceEnv: mutable.Map[String, Any]): Unit =
+    // Initialize variables from parent class first
+    classInfo.parent.foreach { parentClassName =>
+      val parentClassInfo = classRegistry.getOrElse(parentClassName, throw new Exception(s"Class '$parentClassName' not found"))
+      initializeInstanceVariables(parentClassInfo, instanceEnv)
+    }
+    // Initialize this class's variables
+    classInfo.variables.foreach { case (varName, varType) =>
+      instanceEnv.update(varName, null) // Initialize with null or a default value
+    }
 
+  def lookupMethod(className: String, methodName: String): MethodInfo =
+    val classInfo = classRegistry.getOrElse(className, throw new Exception(s"Class '$className' not found"))
+    classInfo.methods.get(methodName) match
+      case Some(methodInfo) => methodInfo
+      case None =>
+        classInfo.parent match
+          case Some(parentClassName) => lookupMethod(parentClassName, methodName)
+          case None => throw new Exception(s"Method '$methodName' not found in class hierarchy of '$className'")
 
 @main def main(): Unit =
-  // Import necessary items if not already in scope
   import Frizzy.*
   import Frizzy.ExpOperation.*
-  import HelperFunctions.*
   import Frizzy.given
 
-  // **Test 1: Class Definitions and Inheritance**
+  val envStack = summon[EnvironmentStack]
 
-  // Define the Base class
-  eval(ClassDef("Base",
+  // **Test 1: Partial Evaluation with Known Variables**
+
+  // Define variables with known values
+  envStack.top._2.update("var", 2)
+  envStack.top._2.update("var1", 10)
+
+  // Construct a conditional expression
+  val conditionalExprKnown = IFTRUE(
+    GREATEREQUAL(
+      Multiply(Value(15), Variable("var")),
+      Add(Value(2), Variable("var1"))
+    ),
+    Assign("somevar", Add(Variable("var"), Value(3))),
+    Assign("somevar", Value(0))
+  )
+
+  // Evaluate the conditional expression
+  eval(conditionalExprKnown)
+
+  // Retrieve and print the value of "somevar"
+  val somevarValueKnown = eval(Variable("somevar"))
+  println(s"Test 1 - somevar (known variables) = $somevarValueKnown") // Expected output: 5
+
+  // **Test 2: Partial Evaluation with Unknown Variables**
+
+  // Clear the environment to simulate unknown variables
+  envStack.top._2.clear()
+
+  // Construct the same conditional expression
+  val conditionalExprUnknown = IFTRUE(
+    GREATEREQUAL(
+      Multiply(Value(15), Variable("var")),
+      Add(Value(2), Variable("var1"))
+    ),
+    Assign("somevar", Add(Variable("var"), Value(3))),
+    Assign("somevar", Value(0))
+  )
+
+  // Evaluate the conditional expression
+  val resultUnknown = eval(conditionalExprUnknown)
+
+  // Print the partially evaluated result
+  println(s"Test 2 - Result (unknown variables): $resultUnknown")
+
+  // Try to retrieve "somevar" (may not be assigned)
+  try
+    val somevarValueUnknown = eval(Variable("somevar"))
+    println(s"Test 2 - somevar (unknown variables) = $somevarValueUnknown")
+  catch
+    case e: Exception => println(s"Test 2 - somevar not assigned due to unknown variables.")
+
+  // **Test 3: Partial Evaluation in Method Invocation**
+
+  // Define a class with a method that uses variables
+  eval(ClassDef("Calculator",
     body = Perform(List(
-      ClassVar("x", "int"),
-      MethodDef("getX", List(), Variable("x")),
-      MethodDef("setX", List(Parameter("value", "int")), Assign("x", Variable("value")))
+      MethodDef("compute", List(Parameter("x", "int")),
+        Perform(List(
+          IFTRUE(
+            GREATEREQUAL(Variable("x"), Value(10)),
+            Assign("result", Multiply(Variable("x"), Value(2))),
+            Assign("result", Multiply(Variable("x"), Value(3)))
+          )
+        ))
+      )
     ))
   ))
 
-  // Define the Derived class that extends Base
-  eval(ClassDef("Derived",
-    body = Perform(List(
-      ClassVar("x", "int"), // Shadows Base.x
-      MethodDef("getX", List(), Variable("x")), // Overrides Base.getX
-      MethodDef("setX", List(Parameter("value", "int")), Assign("x", Variable("value")))
-    )),
-    parent = Some("Base")
-  ))
+  // Create an instance of Calculator
+  eval(CreateInstance("Calculator", "calc"))
 
-  // **Test 2: Instance Creation and Method Invocation**
+  // **Test 3a: Invoke method with known argument**
 
-  // Create an instance of Derived
-  eval(CreateInstance("Derived", "d"))
+  // Invoke compute with x = 15
+  eval(InvokeMethod("calc", "compute", List(Value(15))))
 
-  // Set x in Derived instance 'd'
-  eval(InvokeMethod("d", "setX", List(Value(10))))
+  // Retrieve and print "result"
+  val resultComputeKnown = eval(Variable("calc.result"))
+  println(s"Test 3a - result (x=15) = $resultComputeKnown") // Expected output: 30
 
-  // Get x from Derived instance 'd'
-  val derivedX = eval(InvokeMethod("d", "getX", List()))
-  println(s"Value of x in Derived instance 'd': $derivedX") // Expected output: 10
+  // **Test 3b: Invoke method with unknown argument**
 
-  // Create an instance of Base
-  eval(CreateInstance("Base", "b"))
+  // Clear "result" from instance variables
+  instanceRegistry("calc").variables.remove("result")
 
-  // Set x in Base instance 'b'
-  eval(InvokeMethod("b", "setX", List(Value(5))))
+  // Invoke compute with x = Variable("unknownX")
+  eval(InvokeMethod("calc", "compute", List(Variable("unknownX"))))
 
-  // Get x from Base instance 'b'
-  val baseX = eval(InvokeMethod("b", "getX", List()))
-  println(s"Value of x in Base instance 'b': $baseX") // Expected output: 5
+  // Since "unknownX" is not defined, the condition cannot be fully evaluated
 
-  // **Test 3: Inheritance without Overriding**
+  // Retrieve and print "result"
+  try
+    val resultComputeUnknown = eval(Variable("calc.result"))
+    println(s"Test 3b - result (x=unknown) = $resultComputeUnknown")
+  catch
+    case e: Exception => println(s"Test 3b - result not assigned due to unknown variable 'unknownX'.")
 
-  // Define the Derived2 class that extends Base but does not override getX or setX
-  eval(ClassDef("Derived2",
-    body = Perform(List(
-      ClassVar("y", "int"),
-      MethodDef("setY", List(Parameter("value", "int")), Assign("y", Variable("value")))
-    )),
-    parent = Some("Base")
-  ))
+  // **Test 4: Partial Evaluation with Fuzzy Set Operations**
 
-  // Create an instance of Derived2
-  eval(CreateInstance("Derived2", "d2"))
+  // Define fuzzy sets
+  val setA = Map("x1" -> 0.5, "x2" -> 0.7)
+  val setB = Map("x1" -> 0.6, "x2" -> 0.4)
+  val setC = Variable("unknownSet") // Unknown fuzzy set
 
-  // Set x in Derived2 instance 'd2' (inherited from Base)
-  eval(InvokeMethod("d2", "setX", List(Value(20))))
+  // **Test 4a: Union of known fuzzy sets**
 
-  // Get x from Derived2 instance 'd2' (should use Base's getX)
-  val derived2X = eval(InvokeMethod("d2", "getX", List()))
-  println(s"Value of x in Derived2 instance 'd2': $derived2X") // Expected output: 20
+  val unionKnown = Union(FuzzySetInstance(setA), FuzzySetInstance(setB))
+  val resultUnionKnown = eval(unionKnown)
+  println(s"Test 4a - Union of known sets: $resultUnionKnown")
+  // Expected output: Map(x1 -> 0.6, x2 -> 0.7)
 
-  // **Test 4: Variable Shadowing in Nested Classes**
+  // **Test 4b: Union with an unknown fuzzy set**
 
-    // Define the Outer class with a nested Inner class
-    eval(ClassDef("Outer",
-      body = Perform(List(
-        ClassVar("x", "int"),
-        MethodDef("getX", List(), Variable("x")),
-        // Define the nested Inner class
-        ClassDef("Inner",
-          body = Perform(List(
-            ClassVar("x", "int"), // Shadows Outer.x
-            MethodDef("getX", List(), Variable("x"))
-          ))
-        )
-      ))
-    ))
+  val unionUnknown = Union(FuzzySetInstance(setA), setC)
+  val resultUnionUnknown = eval(unionUnknown)
+  println(s"Test 4b - Union with unknown set: $resultUnionUnknown")
+  // Expected output: Partially evaluated expression
 
-  // Create an instance of Outer
-  eval(CreateInstance("Outer", "outerInstance"))
+  // **Test 5: Partial Evaluation with Scopes**
 
-  // Set x in Outer instance 'outerInstance'
-  eval(Assign("outerInstance.x", Value(100)))
-
-  // Create an instance of Inner
-  // Assuming Inner is registered when evaluating the Outer class definition
-  eval(CreateInstance("Inner", "innerInstance"))
-
-  // Set x in Inner instance 'innerInstance'
-  eval(Assign("innerInstance.x", Value(200)))
-
-  // Invoke getX on innerInstance
-  val innerX = eval(InvokeMethod("innerInstance", "getX", List()))
-  println(s"Value of x in Inner instance 'innerInstance': $innerX") // Expected output: 200
-
-  // Invoke getX on outerInstance
-  val outerX = eval(InvokeMethod("outerInstance", "getX", List()))
-  println(s"Value of x in Outer instance 'outerInstance': $outerX") // Expected output: 100
-
-  // **Test 5: Method Overriding and Dynamic Dispatch**
-
-  // Define the Parent class
-  eval(ClassDef("Parent",
-    body = Perform(List(
-      MethodDef("greet", List(), Value("Hello from Parent"))
+  // Create a scope with known variables
+  eval(CreateScope("MyScope",
+    Perform(List(
+      Assign("x", Value(5)),
+      Assign("y", Value(10)),
+      Assign("sum", Add(Variable("x"), Variable("y")))
     ))
   ))
 
-  // Define the Child class that extends Parent
-  eval(ClassDef("Child",
-    body = Perform(List(
-      MethodDef("greet", List(), Value("Hello from Child"))
-    )),
-    parent = Some("Parent")
+  // Summon the scope and evaluate
+  eval(SummonScope("MyScope"))
+
+  // Retrieve and print "sum"
+  val sumValue = eval(Variable("sum"))
+  println(s"Test 5 - sum in scope: $sumValue") // Expected output: 15
+
+  // **Test 6: Partial Evaluation with Undefined Variables in Scope**
+
+  // Create a scope with an undefined variable
+  eval(CreateScope("UnknownVarScope",
+    Perform(List(
+      Assign("x", Variable("unknownVar")),
+      Assign("y", Value(10)),
+      Assign("sum", Add(Variable("x"), Variable("y")))
+    ))
   ))
 
-  // Create instances of Parent and Child
-  eval(CreateInstance("Parent", "p"))
-  eval(CreateInstance("Child", "c"))
+  // Summon the scope and evaluate
+  eval(SummonScope("UnknownVarScope"))
 
-  // Invoke greet on Parent instance 'p'
-  val parentGreet = eval(InvokeMethod("p", "greet", List()))
-  println(s"Parent instance 'p' says: $parentGreet") // Expected output: "Hello from Parent"
-
-  // Invoke greet on Child instance 'c'
-  val childGreet = eval(InvokeMethod("c", "greet", List()))
-  println(s"Child instance 'c' says: $childGreet") // Expected output: "Hello from Child"
-
-  // **Test 6: Inherited Method without Overriding**
-
-  // Define Sibling class that extends Parent but does not override greet
-  eval(ClassDef("Sibling",
-    body = Perform(List(
-      // No greet method defined here
-    )),
-    parent = Some("Parent")
-  ))
-
-  // Create an instance of Sibling
-  eval(CreateInstance("Sibling", "s"))
-
-  // Invoke greet on Sibling instance 's'
-  val siblingGreet = eval(InvokeMethod("s", "greet", List()))
-  println(s"Sibling instance 's' says: $siblingGreet") // Expected output: "Hello from Parent"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // Retrieve and print "sum"
+  val sumValueUnknownVar = eval(Variable("sum"))
+  println(s"Test 6 - sum with unknown variable: $sumValueUnknownVar")
+// Expected output: Partially evaluated expression

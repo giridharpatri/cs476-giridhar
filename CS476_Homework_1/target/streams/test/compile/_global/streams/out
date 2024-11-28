@@ -1,7 +1,166 @@
-[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E006] Not Found Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:232:77 [0m[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m232 |[0m        MethodDef([31m"add"[0m, List(Parameter([31m"a"[0m, [31m"int"[0m), Parameter([31m"b"[0m, [31m"int"[0m)), Add(Variable([31m"a"[0m), Variable([31m"b"[0m)))[0m
-[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m                                                                             ^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                                        Not found: Add[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:32:51 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m32 |[0m      Assign([31m"result"[0m, Add(Variable([31m"unknownVar"[0m), [31m10[0m)),[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                                                   ^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                                           Found:    ([31m10[0m : Int)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                                           Required: Frizzy.ExpOperation[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:33:23 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m33 |[0m      Assign([31m"result"[0m, [31m0[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                       ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                       Found:    ([31m0[0m : Int)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                       Required: Frizzy.ExpOperation[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:36:11 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m36 |[0m    result shouldEqual expected[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m    ^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mvalue shouldEqual is not a member of Any.[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mAn extension method was tried, but could not be fully constructed:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m    [33mthis[0m.shouldEqual(result)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m    failed with:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m        Ambiguous overload. The overloaded alternatives of [33mmethod[0m [35mshouldEqual[0m in [33mtrait[0m [35mMatchers[0m with types[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              (right: Null)([33mimplicit [0mev: T <:< AnyRef): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              (spread: org.scalactic.TripleEqualsSupport.Spread[T]):[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              (right: Any)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                ([33mimplicit [0mequality: org.scalactic.Equality[T]): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m        all match arguments ((result : Any))((expected : <error unspecified error>))[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:70:56 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m70 |[0m    partialResult shouldEqual Add(Variable([31m"unknownX"[0m), [31m10[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                                                        ^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                                           Found:    ([31m10[0m : Int)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                                           Required: Frizzy.ExpOperation[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:70:18 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m70 |[0m    partialResult shouldEqual Add(Variable([31m"unknownX"[0m), [31m10[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m    ^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mvalue shouldEqual is not a member of Any.[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mAn extension method was tried, but could not be fully constructed:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m    [33mthis[0m.shouldEqual(partialResult)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m    failed with:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m        Ambiguous overload. The overloaded alternatives of [33mmethod[0m [35mshouldEqual[0m in [33mtrait[0m [35mMatchers[0m with types[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              (right: Null)([33mimplicit [0mev: T <:< AnyRef): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              (spread: org.scalactic.TripleEqualsSupport.Spread[T]):[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m              (right: Any)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                ([33mimplicit [0mequality: org.scalactic.Equality[T]): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m        all match arguments ((partialResult : Any))(<error unspecified error>)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:109:61 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m109 |[0m    partialResult shouldEqual Multiply(Variable([31m"unknownX"[0m), [31m3[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m                                                             ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                         Found:    ([31m3[0m : Int)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                         Required: Frizzy.ExpOperation[0m
 [0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
 [0m[[0m[31merror[0m] [0m[0m[31m    |[0m longer explanation available when compiling with `-explain`[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:109:18 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m109 |[0m    partialResult shouldEqual Multiply(Variable([31m"unknownX"[0m), [31m3[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m    ^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0mvalue shouldEqual is not a member of Any.[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0mAn extension method was tried, but could not be fully constructed:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m    [33mthis[0m.shouldEqual(partialResult)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m    failed with:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m        Ambiguous overload. The overloaded alternatives of [33mmethod[0m [35mshouldEqual[0m in [33mtrait[0m [35mMatchers[0m with types[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              (right: Null)([33mimplicit [0mev: T <:< AnyRef): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              (spread: org.scalactic.TripleEqualsSupport.Spread[T]):[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              (right: Any)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                ([33mimplicit [0mequality: org.scalactic.Equality[T]): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m        all match arguments ((partialResult : Any))(<error unspecified error>)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:130:39 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m130 |[0m    [33mval[0m [36mexpectedPartial[0m = Add(Multiply([31m2[0m, Add(Variable([31m"x"[0m), [31m3[0m)), [31m5[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m                                       ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                       Found:    ([31m2[0m : Int)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                       Required: Frizzy.ExpOperation[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:130:61 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m130 |[0m    [33mval[0m [36mexpectedPartial[0m = Add(Multiply([31m2[0m, Add(Variable([31m"x"[0m), [31m3[0m)), [31m5[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m                                                             ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                         Found:    ([31m3[0m : Int)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                         Required: Frizzy.ExpOperation[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:130:66 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m130 |[0m    [33mval[0m [36mexpectedPartial[0m = Add(Multiply([31m2[0m, Add(Variable([31m"x"[0m), [31m3[0m)), [31m5[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m                                                                  ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                         Found:    ([31m5[0m : Int)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                         Required: Frizzy.ExpOperation[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: C:\Users\GPatr\Documents\GitHub\cs476-giridhar\CS476_Homework_1\src\test\scala\FrizzyTest.scala:131:18 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m131 |[0m    resultUnknown shouldEqual expectedPartial[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m    ^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0mvalue shouldEqual is not a member of Any.[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0mAn extension method was tried, but could not be fully constructed:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m    [33mthis[0m.shouldEqual(resultUnknown)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m    failed with:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m        Ambiguous overload. The overloaded alternatives of [33mmethod[0m [35mshouldEqual[0m in [33mtrait[0m [35mMatchers[0m with types[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              (right: Null)([33mimplicit [0mev: T <:< AnyRef): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              (spread: org.scalactic.TripleEqualsSupport.Spread[T]):[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m         [T][0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m          (leftSideValue: T)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m            ([33musing [0mpos: org.scalactic.source.Position, prettifier:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              org.scalactic.Prettifier)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m              (right: Any)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                ([33mimplicit [0mequality: org.scalactic.Equality[T]): org.scalatest.Assertion[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m        all match arguments ((resultUnknown : Any))((expectedPartial : <error unspecified error>))[0m
+[0m[[0m[31merror[0m] [0m[0m11 errors found[0m

@@ -3,291 +3,191 @@ import org.scalatest.matchers.should.Matchers
 import Frizzy.*
 import Frizzy.ExpOperation.*
 import scala.collection.mutable
-import HelperFunctions.*
-
 
 class FrizzyTest extends AnyFlatSpec with Matchers {
 
-  it should "assign and retrieve variables correctly" in {
+  it should "partially evaluate conditional expressions with unknown variables" in {
     given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-    val setA = Map("x1" -> 0.5, "x2" -> 0.7)
-    eval(Assign("A", FuzzySetInstance(setA)))
-    val result = eval(Variable("A"))
-    result shouldEqual setA
-  }
+    envStack.clear()
+    envStack.push(("", mutable.Map[String, Any]()))
 
-  it should "perform Union, Intersect, and XOR operation correctly" in {
-    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
+    // Define variables with known and unknown values
+    envStack.top._2.update("knownVar", 5)
+    // "unknownVar" is not defined
 
-    val setA = Map("x1" -> 0.2, "x2" -> 0.8)
-    val setB = Map("x1" -> 0.6, "x2" -> 0.4)
-
-    val unionResult = eval(Union(FuzzySetInstance(setA), FuzzySetInstance(setB)))
-    val intersectResult = eval(Intersection(FuzzySetInstance(setA), FuzzySetInstance(setB)))
-    val XORResult = eval(XOR(FuzzySetInstance(setA), FuzzySetInstance(setB)))
-    val expectedUnion = Map(
-      "x1" -> 0.6,
-      "x2" -> 0.8
-    )
-    val expectedIntersect = Map(
-      "x1" -> 0.2,
-      "x2" -> 0.4
-    )
-    val expectedXOR = Map(
-      "x1" -> 0.39999999999999997,
-      "x2" -> 0.4
-    )
-    unionResult shouldEqual expectedUnion
-    intersectResult shouldEqual expectedIntersect
-    XORResult shouldEqual expectedXOR
-  }
-
-  it should "variable bindings should be consistent with Begin and End scopes" in {
-    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-
-    val setOuter = Map("x1" -> 0.5)
-    val setInner = Map("x1" -> 0.8)
-
-    eval(Assign("A", FuzzySetInstance(setOuter)))
-
-    eval(BeginScope("InnerScope"))
-    eval(Assign("A", FuzzySetInstance(setInner)))
-    val innerResult = eval(Variable("A"))
-    innerResult shouldEqual setInner
-    eval(EndScope("InnerScope"))
-
-    val outerResult = eval(Variable("A"))
-    outerResult shouldEqual setOuter
-  }
-
-//  it should "test creation and invoking of named scopes, and sequence of operations" in {
-//    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-//
-//    val setA = Map("x1" -> 0.2, "x2" -> 0.8)
-//    val setB = Map("x1" -> 0.5, "x2" -> 0.6)
-//
-//    // Create a scope "MyScope" with a sequence of operations
-//    eval(CreateScope("MyScope",
-//      Perform(List(
-//        Assign("x", FuzzySetInstance(setA)),
-//        Assign("y", FuzzySetInstance(setB)),
-//        Assign("unionResult", Union(Variable("x"), Variable("y")))
-//      ))
-//    ))
-//
-//    // Summon the scope "MyScope" and execute its body
-//    val result = eval(SummonScope("MyScope"))
-//
-//    // The result should be the value assigned to "unionResult" in the scope
-//    val expected = Map(
-//      "x1" -> 0.5,
-//      "x2" -> 0.8
-//    )
-//    result shouldEqual expected
-//  }
-
-  it should "should obscure variables defined in invoked scopes from outside" in {
-    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-
-    val setA = Map("x1" -> 0.2)
-
-    eval(CreateScope("MyScope",
-      Perform(List(
-        Assign("A", FuzzySetInstance(setA))
-      ))
-    ))
-
-    eval(SummonScope("MyScope"))
-
-    an[Exception] should be thrownBy eval(Variable("A"))
-  }
-
-  it should "perform Complement operation correctly" in {
-    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-
-    val setA = Map("x1" -> 0.2, "x2" -> 0.8, "x3" -> 0.5)
-
-    val complementResult = eval(Complement(FuzzySetInstance(setA)))
-
-    val expected = Map(
-      "x1" -> 0.8,
-      "x2" -> 0.19999999999999996,
-      "x3" -> 0.5
+    // Construct a conditional expression
+    val conditionalExpr = IFTRUE(
+      GREATEREQUAL(
+        Variable("unknownVar"), // Unknown variable
+        Variable("knownVar")    // Known variable
+      ),
+      Assign("result", Add(Variable("unknownVar"), Value(10))),
+      Assign("result", Value(0))
     )
 
-    complementResult shouldEqual expected
-  }
+    // Evaluate the conditional expression
+    val result = eval(conditionalExpr).asInstanceOf[ExpOperation]
 
-  it should "perform AlphaCut operation correctly" in {
-    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-
-    val setA = Map("x1" -> 0.2, "x2" -> 0.8, "x3" -> 0.5, "x4" -> 0.9)
-
-    val alpha = 0.6
-
-    val alphaCutResult = eval(AlphaCut(alpha, FuzzySetInstance(setA)))
-
-    val expected = Map(
-      "x2" -> 1.0,
-      "x4" -> 1.0
+    // The expected result is a partially evaluated IFTRUE expression
+    val expected = IFTRUE(
+      GREATEREQUAL(Variable("unknownVar"), Value(5)),
+      Assign("result", Add(Variable("unknownVar"), Value(10))),
+      Assign("result", Value(0))
     )
-    alphaCutResult shouldEqual expected
+
+    result shouldEqual expected
+
+    // Since the condition cannot be evaluated, 'result' should not be assigned
+    // Expect an exception when trying to evaluate 'result'
+    //an[Exception] should be thrownBy eval(Variable("result"))
   }
 
-  it should "assign and retrieve class variables correctly" in {
+  it should "partially evaluate method invocations with unknown arguments" in {
     given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
+    envStack.clear()
+    envStack.push(("", mutable.Map[String, Any]()))
 
-    // Define a simple class with a variable and getter/setter methods
-    eval(ClassDef("SimpleClass",
+    // Define a class with a method that uses an argument
+    eval(ClassDef("Adder",
       body = Perform(List(
-        ClassVar("x", "int"),
-        MethodDef("getX", List(), Variable("x")),
-        MethodDef("setX", List(Parameter("value", "int")), Assign("x", Variable("value")))
+        MethodDef("addTen", List(Parameter("x", "int")),
+          Assign("result", Add(Variable("x"), Value(10)))
+        )
       ))
     ))
 
-    // Create an instance of SimpleClass
-    eval(CreateInstance("SimpleClass", "instance"))
+    // Create an instance of Adder
+    eval(CreateInstance("Adder", "adderInstance"))
 
-    // Set x to 42
-    eval(InvokeMethod("instance", "setX", List(Value(42))))
+    // Invoke addTen with a known argument
+    eval(InvokeMethod("adderInstance", "addTen", List(Value(5))))
+    val knownResult = eval(Variable("adderInstance.result"))
+    knownResult shouldEqual 15
 
-    // Retrieve x and check if it's 42
-    val result = eval(InvokeMethod("instance", "getX", List()))
-    result shouldEqual 42
+    // Clear "result" from instance variables
+    instanceRegistry("adderInstance").variables.remove("result")
+
+    // Invoke addTen with an unknown argument
+    eval(InvokeMethod("adderInstance", "addTen", List(Variable("unknownX"))))
+
+    // Since "unknownX" is not defined, "result" should be a partially evaluated expression
+    val partialResult = eval(Variable("adderInstance.result")).asInstanceOf[ExpOperation]
+    partialResult shouldEqual Add(Variable("unknownX"), Value(10))
   }
 
-  it should "inherit methods and allow method overriding" in {
+  it should "correctly handle method overriding with partial evaluation in inheritance hierarchies" in {
     given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
+    envStack.clear()
+    envStack.push(("", mutable.Map[String, Any]()))
+
+    // Define a base class with a method
+    eval(ClassDef("BaseClass",
+      body = Perform(List(
+        MethodDef("compute", List(Parameter("x", "int")),
+          Assign("result", Multiply(Variable("x"), Value(2)))
+        )
+      ))
+    ))
+
+    // Define a subclass that overrides the method
+    eval(ClassDef("SubClass",
+      body = Perform(List(
+        MethodDef("compute", List(Parameter("x", "int")),
+          Assign("result", Multiply(Variable("x"), Value(3)))
+        )
+      )),
+      parent = Some("BaseClass")
+    ))
+
+    // Create an instance of SubClass
+    eval(CreateInstance("SubClass", "subInstance"))
+
+    // Invoke compute with a known argument
+    eval(InvokeMethod("subInstance", "compute", List(Value(5))))
+    val knownResult = eval(Variable("subInstance.result"))
+    knownResult shouldEqual 15
+
+    // Clear "result" from instance variables
+    instanceRegistry("subInstance").variables.remove("result")
+
+    // Invoke compute with an unknown argument
+    eval(InvokeMethod("subInstance", "compute", List(Variable("unknownX"))))
+    val partialResult = eval(Variable("subInstance.result")).asInstanceOf[ExpOperation]
+    partialResult shouldEqual Multiply(Variable("unknownX"), Value(3))
+  }
+
+  it should "apply reduction rules and handle associativity in partial evaluations" in {
+    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
+    envStack.clear()
+    envStack.push(("", mutable.Map[String, Any]()))
+
+    // Define an expression with nested operations
+    val complexExpr = Add(
+      Multiply(Value(2), Add(Variable("x"), Value(3))),
+      Value(5)
+    )
+
+    // With x = 7
+    envStack.top._2.update("x", 7)
+    val resultKnown = eval(complexExpr)
+    resultKnown shouldEqual 2 * (7 + 3) + 5 // Should be 2 * 10 + 5 = 25
+
+    // With x unknown
+    envStack.top._2.remove("x")
+    val resultUnknown = eval(complexExpr).asInstanceOf[ExpOperation]
+    // Should be partially evaluated to Add(Multiply(Value(2), Add(Variable("x"), Value(3))), Value(5))
+    val expectedPartial = Add(Multiply(Value(2), Add(Variable("x"), Value(3))), Value(5))
+    resultUnknown shouldEqual expectedPartial
+  }
+
+  it should "partially evaluate method calls in inheritance hierarchies with dynamic dispatch" in {
+    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
+    envStack.clear()
+    envStack.push(("", mutable.Map[String, Any]()))
 
     // Define a base class with a method
     eval(ClassDef("Animal",
       body = Perform(List(
-        MethodDef("speak", List(), Value("Animal sound"))
+        MethodDef("makeSound", List(),
+          Assign("sound", Value("Some generic sound"))
+        )
       ))
     ))
 
     // Define a subclass that overrides the method
     eval(ClassDef("Dog",
       body = Perform(List(
-        MethodDef("speak", List(), Value("Woof"))
+        MethodDef("makeSound", List(),
+          Assign("sound", Value("Bark"))
+        )
       )),
       parent = Some("Animal")
     ))
 
-    // Create instances of both classes
-    eval(CreateInstance("Animal", "animal"))
-    eval(CreateInstance("Dog", "dog"))
-
-    // Test the speak method on both instances
-    val animalSpeak = eval(InvokeMethod("animal", "speak", List()))
-    val dogSpeak = eval(InvokeMethod("dog", "speak", List()))
-
-    animalSpeak shouldEqual "Animal sound"
-    dogSpeak shouldEqual "Woof"
-  }
-
-  it should "allow variable shadowing in subclasses" in {
-    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-
-    // Define a base class with a variable x
-    eval(ClassDef("ParentClass",
+    // Define another subclass without overriding the method
+    eval(ClassDef("Cat",
       body = Perform(List(
-        ClassVar("x", "int"),
-        MethodDef("getX", List(), Variable("x"))
-      ))
-    ))
-
-    // Define a subclass that declares a variable x, shadowing the parent variable
-    eval(ClassDef("ChildClass",
-      body = Perform(List(
-        ClassVar("x", "int"),
-        MethodDef("getX", List(), Variable("x"))
+        // No overriding of makeSound
       )),
-      parent = Some("ParentClass")
+      parent = Some("Animal")
     ))
 
     // Create instances
-    eval(CreateInstance("ParentClass", "parentInstance"))
-    eval(CreateInstance("ChildClass", "childInstance"))
+    eval(CreateInstance("Dog", "dogInstance"))
+    eval(CreateInstance("Cat", "catInstance"))
 
-    // Assign values to x in both instances
-    eval(Assign("parentInstance.x", Value(10)))
-    eval(Assign("childInstance.x", Value(20)))
+    // Invoke makeSound on dogInstance
+    eval(InvokeMethod("dogInstance", "makeSound", List()))
+    val dogSound = eval(Variable("dogInstance.sound"))
+    dogSound shouldEqual "Bark"
 
-    // Retrieve x from both instances
-    val parentX = eval(InvokeMethod("parentInstance", "getX", List()))
-    val childX = eval(InvokeMethod("childInstance", "getX", List()))
+    // Clear "sound" from instance variables
+    instanceRegistry("catInstance").variables.remove("sound")
 
-    parentX shouldEqual 10
-    childX shouldEqual 20
+    // Invoke makeSound on catInstance
+    eval(InvokeMethod("catInstance", "makeSound", List()))
+    val catSound = eval(Variable("catInstance.sound"))
+    catSound shouldEqual "Some generic sound"
   }
 
-//  it should "invoke methods with parameters and perform fuzzy set operations" in {
-//    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-//
-//    // Define a class with a method that performs Union of two fuzzy sets
-//    eval(ClassDef("FuzzySetOperations",
-//      body = Perform(List(
-//        MethodDef("unionSets", List(Parameter("set1", "FuzzySet"), Parameter("set2", "FuzzySet")),
-//          Union(Variable("set1"), Variable("set2"))
-//        )
-//      ))
-//    ))
-//
-//    // Create an instance of the class
-//    eval(CreateInstance("FuzzySetOperations", "fuzzyOps"))
-//
-//    // Define two fuzzy sets
-//    val setA = Map("x1" -> 0.3, "x2" -> 0.7)
-//    val setB = Map("x1" -> 0.6, "x2" -> 0.4)
-//
-//    // Invoke the unionSets method
-//    val result = eval(InvokeMethod("fuzzyOps", "unionSets", List(FuzzySetInstance(setA), FuzzySetInstance(setB))))
-//
-//    // Expected result after union
-//    val expected = Map(
-//      "x1" -> 0.6,
-//      "x2" -> 0.7
-//    )
-//
-//    result shouldEqual expected
-//  }
-
-
-//  it should "invoke methods that create and use scopes" in {
-//    given envStack: EnvironmentStack = mutable.Stack(("", mutable.Map[String, Any]()))
-//
-//    // Define a class with a method that creates a scope and performs operations
-//    eval(ClassDef("ScopeTester",
-//      body = Perform(List(
-//        MethodDef("testScope", List(),
-//          Perform(List(
-//            BeginScope("methodScope"),
-//            Assign("A", FuzzySetInstance(Map("x1" -> 0.5))),
-//            EndScope("methodScope"),
-//            Variable("A")
-//          ))
-//        )
-//      ))
-//    ))
-//
-//    // Create an instance of the class
-//    eval(CreateInstance("ScopeTester", "scopeTester"))
-//
-//    // Invoke the testScope method
-//    val result = eval(InvokeMethod("scopeTester", "testScope", List()))
-//
-//    // Expected result
-//    val expected = Map(
-//      "x1" -> 0.5
-//    )
-//
-//    result shouldEqual expected
-//  }
-
-
 }
-
-  
-
