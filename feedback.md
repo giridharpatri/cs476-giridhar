@@ -1,3 +1,11 @@
+# Feedback for Homework 3
+
+## Score: 19.7/20
+
+1. -0.3%: One use of `var`.
+
+---
+
 # Feedback for Homework 2
 
 ## Score: 12.8/15
